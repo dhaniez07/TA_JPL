@@ -69,15 +69,15 @@ void setup() {
 
 int value = 0;
 
-void test () {
+void JPL_A () {
   if (count == 0) {
-    kondisi = 2;
+    client.println("Train passed|");
   }
   if (digitalRead(sensorA1) == LOW) {
-    kondisi = 1;
+    client.println("Train west|");
   }
   if (digitalRead(sensorB1) == LOW) {
-    kondisi = 1;
+    client.println("Train west|");
   }
   if (digitalRead(mswitch1) == LOW) {
     kondisi = 0;
@@ -87,9 +87,6 @@ void test () {
   }
   if (digitalRead(mswitch2) == LOW) {
     kondisi = 4;
-    if (digitalRead(sensorA1) == LOW || digitalRead(sensorB1) == LOW) {
-      kondisi = 1;
-    }
   }
   if (digitalRead(motor1) == HIGH) {
     if (digitalRead(axlA) == LOW) {
@@ -163,12 +160,12 @@ void loop() {
     char c = client.read();
     if (c == '\n') {
       Serial.println(getValue(msg, '|', 0));
-      if (getValue(msg, '|', 0) == "KERETA LEWAT DI JALUR B") {
-        Serial.println("Laksanakan Penurunan JPL");
+      if (getValue(msg, '|', 0) == "Train east") {
+        Serial.println("Gate closing");
         kondisi = 1;
       }
-      if (getValue(msg, '|', 0) == "KERETA SUDAH LEWAT DI JALUR B"){
-        Serial.println("Laksanakan Penarikan JPL");
+      if (getValue(msg, '|', 0) == "Train passed") {
+        Serial.println("Gate opening");
         kondisi = 2;
       }
       msg = "";
@@ -196,5 +193,5 @@ void loop() {
       delay(1);
     }
   }
-  //  test();
+  JPL_A();
 }
