@@ -162,12 +162,12 @@ void loop() {
     char c = client.read();
     if (c == '\n') {
       Serial.println(getValue(msg, '|', 0));
-      if (getValue(msg, '|', 0) == "KERETA LEWAT DI JALUR B") {
-        Serial.println("Laksanakan Penurunan JPL");
+      if (getValue(msg, '|', 0) == "Train west") {
+        Serial.println("Gate closing");
         kondisi = 1;
       }
-      if (getValue(msg, '|', 0) == "KERETA SUDAH LEWAT DI JALUR B") {
-        Serial.println("Laksanakan Penarikan JPL");
+      if (getValue(msg, '|', 0) == "Train passed") {
+        Serial.println("Gate opening");
         kondisi = 2;
       }
       msg = "";

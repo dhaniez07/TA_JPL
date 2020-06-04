@@ -6,39 +6,39 @@ IPAddress server(192, 168, 4, 2);
 WiFiClient client;
 
 const int sensorA1 = 36;
-const int sensorA2 = 39;
-const int sensorB1 = 34;
-const int sensorB2 = 35;
-const int mswitch1 = 6;
-const int mswitch2 = 7;
-const int axlA = 12;
-const int axlB = 13;
+//const int sensorA2 = 39;
+//const int sensorB1 = 34;
+//const int sensorB2 = 35;
+const int mswitch1 = 32;
+const int mswitch2 = 33;
+const int axlA = 25;
+const int axlB = 26;
 const int motor1 = 16;
 const int motor2 = 17;
-const int lamp1 = 10;
-const int lamp2 = 11;
+//const int lamp1 = 10;
+//const int lamp2 = 11;
 
 int kondisi = 0;
 int count = 0;
 
 void setup() {
   pinMode(sensorA1, INPUT);
-  pinMode(sensorA2, INPUT);
-  pinMode(sensorB1, INPUT);
-  pinMode(sensorB2, INPUT);
+//  pinMode(sensorA2, INPUT);
+//  pinMode(sensorB1, INPUT);
+//  pinMode(sensorB2, INPUT);
   pinMode(mswitch1, INPUT);
   pinMode(mswitch2, INPUT);
   pinMode(axlA, INPUT_PULLUP);
   pinMode(axlB, INPUT_PULLUP);
   pinMode(motor1, OUTPUT);
   pinMode(motor2, OUTPUT);
-  pinMode(lamp1, OUTPUT);
-  pinMode(lamp2, OUTPUT);
+//  pinMode(lamp1, OUTPUT);
+//  pinMode(lamp2, OUTPUT);
 
   digitalWrite(sensorA1, HIGH);
-  digitalWrite(sensorA2, HIGH);
-  digitalWrite(sensorB1, HIGH);
-  digitalWrite(sensorB2, HIGH);
+//  digitalWrite(sensorA2, HIGH);
+//  digitalWrite(sensorB1, HIGH);
+//  digitalWrite(sensorB2, HIGH);
   digitalWrite(mswitch1, HIGH);
   digitalWrite(mswitch2, HIGH);
   digitalWrite(axlA, HIGH);
@@ -72,13 +72,14 @@ int value = 0;
 void JPL_A () {
   if (count == 0) {
     client.println("Train passed|");
+    delay(200);
   }
   if (digitalRead(sensorA1) == LOW) {
     client.println("Train west|");
   }
-  if (digitalRead(sensorB1) == LOW) {
-    client.println("Train west|");
-  }
+//  if (digitalRead(sensorB1) == LOW) {
+//    client.println("Train west|");
+//  }
   if (digitalRead(mswitch1) == LOW) {
     kondisi = 0;
     if (count == 0) {
