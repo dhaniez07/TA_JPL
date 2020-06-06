@@ -3,6 +3,7 @@ boolean cgsBot = false;
 boolean cgsTop = false;
 boolean axlePlus = false;
 boolean axleMin = false;
+boolean cxTrain = false;
 int count;
 
 void initPin() {
@@ -29,7 +30,7 @@ void onDeviceCommand(String msg) {
 }
 
 void onDeviceCycle() {
-  checkTrain();
+  checkTrains();
   countIn();
   countOut();
   checkGateSensorBottom();
@@ -38,22 +39,6 @@ void onDeviceCycle() {
 
 void onGetDeviceState(String msg) {
   sendMessage(String("OK"));
-}
-
-void checkTrain() {
-  boolean  sensor = digitalRead(sensor_a1);
-  if (last_a1 != sensor) {
-    if (sensor) {
-      //0 -> 1
-      sendMessage("IncomingTrain EW");
-      delay(100);
-    } else {
-      //1 -> 0
-      sendMessage("OutgoingTrain EW");
-      delay(100);
-    }
-    last_a1 = sensor;
-  }
 }
 
 void countIn() {
@@ -109,5 +94,21 @@ void checkGateSensorTop() {
       delay(100);
     }
     cgsTop = checkTop;
+  }
+}
+
+void checkTrains() {
+  boolean  checkTrain = digitalRead(sensor_a1);
+  if (cxTrain != checkTrain) {
+    if (checkTrain) {
+      //0 -> 1
+      sendMessage("Gate opened");
+      delay(100);
+    } else {
+      //1 -> 0
+      sendMessage("Gate closing");
+      delay(100);
+    }
+    cxTrain = checkTrain;
   }
 }

@@ -5,7 +5,7 @@ const char* password = "12341234";
 IPAddress server(192, 168, 4, 2);
 WiFiClient client;
 
-int sensor_a1 = 34;
+int sensor_a1 = 36;
 int axl1 = 32;
 int axl2 = 33;
 int mswitch1 = 25;
